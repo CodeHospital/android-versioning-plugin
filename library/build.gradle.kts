@@ -5,7 +5,7 @@ plugins {
     id("com.gradle.plugin-publish") version "1.3.1"
 }
 
-group = "com.github.codehospital"
+group = "com.codehospital"
 version = "1.0.1"
 
 gradlePlugin {
@@ -33,7 +33,7 @@ afterEvaluate {
         publications {
             create<MavenPublication>("mavenJava") {
                 from(components["java"])
-                groupId = "com.github.codehospital"
+                groupId = "com.codehospital"
                 artifactId = "versioning-plugin"
                 version = project.version.toString()
 
