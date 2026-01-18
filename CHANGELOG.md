@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2026-01-18
+
+### Added
+- Auto-increment patch version on Release assemble/bundle tasks
+- Auto-increment build version on Debug/other assemble/bundle tasks
+
 ## [1.0.4] - 2026-01-18
 
 ### Fixed
