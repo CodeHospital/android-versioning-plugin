@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.7] - 2026-02-06
+
+### Fixed
+- Gradle 9 compatibility: Added proper `VersioningExtension` for type-safe access
+- Fixed version catalog `alias()` support by simplifying publication configuration
+
+### Changed
+- `versioning` extension now available in build scripts (use `versioning.getVersionCode()` etc.)
+- Backward compatible: `Versioning` object still available via extraProperties
+
 ## [1.0.5] - 2026-01-18
 
 ### Added

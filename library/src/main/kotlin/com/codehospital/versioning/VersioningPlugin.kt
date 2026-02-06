@@ -17,7 +17,14 @@ class VersioningPlugin : Plugin<Project> {
         // Initialize version.properties if it doesn't exist
         Versioning.getVersionName(project)
        
-        // Make the Versioning object available at the top level in the build script
+        // Register the extension for Gradle 9+ compatibility
+        val extension = project.extensions.create(
+            VersioningExtension.NAME,
+            VersioningExtension::class.java,
+            project
+        )
+        
+        // Also keep extraProperties for backward compatibility
         project.extensions.extraProperties.set("Versioning", Versioning)
 
         // Add BUILD_TIME to Android buildConfigFields
