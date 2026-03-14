@@ -23,7 +23,8 @@ class VersioningPlugin : Plugin<Project> {
             VersioningExtension::class.java,
             project
         )
-        
+      project.extensions.add(VersioningExtension.NAME, extension)
+
         // Also keep extraProperties for backward compatibility
         project.extensions.extraProperties.set("Versioning", Versioning)
 

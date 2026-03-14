@@ -1,6 +1,7 @@
 package com.codehospital.versioning
 
 import org.gradle.api.Project
+import java.io.File
 import java.util.Properties
 
 /**
@@ -88,7 +89,7 @@ object Versioning {
      */
     private fun loadVersionProperties(project: Project): Properties {
         val properties = Properties()
-        val versionPropertiesFile = project.file(VERSION_PROPERTIES_FILE)
+        val versionPropertiesFile = resolveVersionPropertiesFile(project)
         
         if (versionPropertiesFile.exists()) {
             versionPropertiesFile.inputStream().use { properties.load(it) }
@@ -108,9 +109,22 @@ object Versioning {
      * Saves the version properties to the version.properties file.
      */
     private fun saveVersionProperties(project: Project, properties: Properties) {
-        val versionPropertiesFile = project.file(VERSION_PROPERTIES_FILE)
+        val versionPropertiesFile = resolveVersionPropertiesFile(project)
         versionPropertiesFile.outputStream().use {
             properties.store(it, "Version properties for ${project.name}")
+        }
+    }
+
+    private fun resolveVersionPropertiesFile(project: Project): File {
+        val rootVersionPropertiesFile = project.rootProject.file(VERSION_PROPERTIES_FILE)
+        val projectVersionPropertiesFile = project.file(VERSION_PROPERTIES_FILE)
+
+        return when {
+            rootVersionPropertiesFile.absoluteFile == projectVersionPropertiesFile.absoluteFile ->
+                rootVersionPropertiesFile
+            rootVersionPropertiesFile.exists() -> rootVersionPropertiesFile
+            projectVersionPropertiesFile.exists() -> projectVersionPropertiesFile
+            else -> rootVersionPropertiesFile
         }
     }
 }

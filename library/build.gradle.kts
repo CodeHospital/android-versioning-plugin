@@ -9,7 +9,7 @@ version = "1.0.11"
 
 gradlePlugin {
     plugins {
-        create("versioningPlugin") {
+        create("Versioning") {
             id = "com.codehospital.versioning"
             implementationClass = "com.codehospital.versioning.VersioningPlugin"
         }
@@ -49,4 +49,6 @@ publishing {
 dependencies {
     implementation(gradleApi())
     implementation(kotlin("stdlib-jdk8"))
+    testImplementation(gradleTestKit())
+    testImplementation("junit:junit:4.13.2")
 }
