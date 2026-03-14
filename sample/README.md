@@ -1,6 +1,8 @@
 # Sample Android App
 
-This sample app applies the local `com.codehospital.versioning` plugin via `includeBuild("..")`.
+This sample app applies `com.codehospital.versioning` via the version catalog alias `alias(libs.plugins.codehospital.versioning)`.
+
+The plugin is resolved from JitPack, with `pluginManagement.resolutionStrategy` mapping the plugin id to the published module `com.github.CodeHospital.versioning:library:<plugin-version>`.
 
 ## Build it
 

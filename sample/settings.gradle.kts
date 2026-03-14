@@ -7,8 +7,15 @@ pluginManagement {
         gradlePluginPortal()
         mavenCentral()
     }
-    // Use local build for development; JitPack when consumed externally.
-    includeBuild("..")
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "com.codehospital.versioning") {
+                val version = requested.version
+                    ?: error("Version is required for com.codehospital.versioning")
+                useModule("com.github.CodeHospital.versioning:library:$version")
+            }
+        }
+    }
 }
 
 dependencyResolutionManagement {

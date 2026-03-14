@@ -1,6 +1,7 @@
 plugins {
-    id("com.android.application") version "8.6.1" apply false
-    id("org.jetbrains.kotlin.android") version "1.9.24" apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.codehospital.versioning) apply false
 }
 
 // Root build config kept minimal. App module defined in app/build.gradle.kts
