@@ -32,7 +32,7 @@ class VersioningPlugin : Plugin<Project> {
         }
 
         // Also keep extraProperties for backward compatibility
-        project.extensions.extraProperties.set("Versioning", Versioning)
+        project.extensions.extraProperties.set("Versioning", VersioningFacade())
 
         // Add BUILD_TIME to Android buildConfigFields
         project.afterEvaluate {
