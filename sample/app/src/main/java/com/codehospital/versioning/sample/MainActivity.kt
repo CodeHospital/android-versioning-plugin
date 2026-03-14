@@ -1,39 +1,47 @@
 package com.codehospital.versioning.sample
 
+import android.app.Activity
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.codehospital.versioning.Versioning
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.TextView
 
-class MainActivity : ComponentActivity() {
+class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val versionName = Versioning.getVersionName(project, "release")
-        val versionCode = Versioning.getVersionCode(project, "release")
-        setContent {
-            App(versionName, versionCode)
-        }
-    }
-}
 
-@Composable
-fun App(versionName: String, versionCode: Int) {
-    MaterialTheme {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.padding(24.dp)) {
-                Text(text = "Versioning Plugin Sample")
-                Text(text = "versionName: $versionName")
-                Text(text = "versionCode: $versionCode")
-            }
+        val container = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            val padding = (1+24 * resources.displayMetrics.density).toInt()
+            setPadding(padding, padding, padding, padding)
         }
+
+        val lines = listOf(
+            "Versioning Plugin Sample",
+            "",
+            "Build variant: ${if (BuildConfig.DEBUG) "debug" else "release"}",
+            "Release version name: ${BuildConfig.PLUGIN_RELEASE_VERSION_NAME}",
+            "Release version code: ${BuildConfig.PLUGIN_RELEASE_VERSION_CODE}",
+            "Debug version name: ${BuildConfig.PLUGIN_DEBUG_VERSION_NAME}",
+            "Debug version code: ${BuildConfig.PLUGIN_DEBUG_VERSION_CODE}",
+            "Version build: ${BuildConfig.PLUGIN_VERSION_BUILD}",
+            "Debug suffix: ${BuildConfig.PLUGIN_DEBUG_SUFFIX}",
+            "Build time: ${BuildConfig.BUILD_TIME}",
+        )
+
+        lines.forEach { line ->
+            container.addView(
+                TextView(this).apply {
+                    text = line
+                    textSize = if (line == "Versioning Plugin Sample") 22f else 16f
+                }
+            )
+        }
+
+        setContentView(
+            ScrollView(this).apply {
+                addView(container)
+            }
+        )
     }
 }

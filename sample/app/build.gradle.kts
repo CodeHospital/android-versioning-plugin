@@ -15,6 +15,12 @@ android {
 
         versionCode = versioning.getVersionCode("release")
         versionName = versioning.getVersionName("release")
+        buildConfigField("String", "PLUGIN_RELEASE_VERSION_NAME", "\"${versioning.getVersionName("release")}\"")
+        buildConfigField("int", "PLUGIN_RELEASE_VERSION_CODE", "${versioning.getVersionCode("release")}")
+        buildConfigField("String", "PLUGIN_DEBUG_VERSION_NAME", "\"${versioning.getVersionName("debug")}\"")
+        buildConfigField("int", "PLUGIN_DEBUG_VERSION_CODE", "${versioning.getVersionCode("debug")}")
+        buildConfigField("int", "PLUGIN_VERSION_BUILD", "${versioning.getVersionBuild()}")
+        buildConfigField("String", "PLUGIN_DEBUG_SUFFIX", "\"${versioning.getDebugSuffix()}\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,6 +36,10 @@ android {
         debug {
             versionNameSuffix = versioning.getDebugSuffix()
         }
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     compileOptions {
