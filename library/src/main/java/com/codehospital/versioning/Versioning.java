@@ -23,10 +23,6 @@ public final class Versioning {
     private Versioning() {
     }
 
-    public static int getVersionCode(Project project) {
-        return getVersionCode(project, "debug");
-    }
-
     public static int getVersionCode(Project project, String buildType) {
         Properties properties = loadVersionProperties(project);
         int major = Integer.parseInt(properties.getProperty(VERSION_MAJOR, "0"));
@@ -40,10 +36,6 @@ public final class Versioning {
         }
 
         return code;
-    }
-
-    public static String getVersionName(Project project) {
-        return getVersionName(project, "release");
     }
 
     public static String getVersionName(Project project, String buildType) {

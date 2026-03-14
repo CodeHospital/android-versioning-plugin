@@ -7,16 +7,8 @@ import org.gradle.api.Project;
  * through Gradle extra properties.
  */
 public final class VersioningFacade {
-    public int getVersionCode(Project project) {
-        return Versioning.getVersionCode(project);
-    }
-
     public int getVersionCode(Project project, String buildType) {
         return Versioning.getVersionCode(project, buildType);
-    }
-
-    public String getVersionName(Project project) {
-        return Versioning.getVersionName(project);
     }
 
     public String getVersionName(Project project, String buildType) {

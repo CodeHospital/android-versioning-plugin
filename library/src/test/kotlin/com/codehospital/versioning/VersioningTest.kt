@@ -25,7 +25,7 @@ class VersioningTest {
         writeProperties(rootVersionFile, major = 2, minor = 5, patch = 8, build = 13)
         writeProperties(moduleVersionFile, major = 9, minor = 9, patch = 9, build = 9)
 
-        assertEquals("2.5.8", Versioning.getVersionName(moduleProject))
+        assertEquals("2.5.8", Versioning.getVersionName(moduleProject, "release"))
         assertEquals("2.5.8 v13", Versioning.getVersionName(moduleProject, "debug"))
 
         Versioning.incrementVersionBuild(moduleProject)
@@ -41,7 +41,7 @@ class VersioningTest {
 
         writeProperties(moduleVersionFile, major = 4, minor = 1, patch = 7, build = 3)
 
-        assertEquals("4.1.7", Versioning.getVersionName(moduleProject))
+        assertEquals("4.1.7", Versioning.getVersionName(moduleProject, "release"))
 
         Versioning.incrementVersionBuild(moduleProject)
 
@@ -54,7 +54,7 @@ class VersioningTest {
         val rootVersionFile = rootProject.file("version.properties")
         val moduleVersionFile = moduleProject.file("version.properties")
 
-        assertEquals("1.0.1", Versioning.getVersionName(moduleProject))
+        assertEquals("1.0.1", Versioning.getVersionName(moduleProject, "release"))
 
         assertTrue(rootVersionFile.exists())
         assertFalse(moduleVersionFile.exists())

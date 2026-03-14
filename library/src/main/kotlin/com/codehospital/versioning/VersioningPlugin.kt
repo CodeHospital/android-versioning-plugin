@@ -18,7 +18,7 @@ class VersioningPlugin : Plugin<Project> {
         project.logger.lifecycle("Versioning plugin applied to project ${project.name}")
         
         // Initialize version.properties if it doesn't exist
-        Versioning.getVersionName(project)
+        Versioning.getVersionName(project, "debug")
        
         // Register the extension for Gradle 9+ compatibility
         val extension = project.extensions.findByName(VersioningExtension.NAME) as? VersioningExtension
@@ -75,13 +75,15 @@ class VersioningPlugin : Plugin<Project> {
                     return
                 }
 
+                var buildType = "debug"
                 if (shouldIncrementPatch) {
+                    buildType = "release"
                     Versioning.incrementVersionPatch(project)
-                    project.logger.lifecycle("Incremented patch version: ${Versioning.getVersionName(project)}")
+                    project.logger.lifecycle("Incremented patch version: ${Versioning.getVersionName(project, buildType)}")
                 }
 
                 Versioning.incrementVersionBuild(project)
-                project.logger.lifecycle("Incremented build version: ${Versioning.getVersionName(project, "debug")}")
+                project.logger.lifecycle("Incremented build version: ${Versioning.getVersionName(project, buildType)}")
             }
         })
     }
